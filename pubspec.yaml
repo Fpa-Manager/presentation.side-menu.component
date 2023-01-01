@@ -1,7 +1,8 @@
 name: side_menu
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+homepage: ''
+publish_to: 'none'
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
@@ -10,6 +11,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  system:
+    git:
+      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.system.git
+
+  mytheme:
+    git:
+      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.presentation.theme.git
+
+  phosphor_flutter: ^1.4.0
 
 dev_dependencies:
   flutter_test:
