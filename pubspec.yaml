@@ -13,12 +13,10 @@ dependencies:
     sdk: flutter
 
   system:
-    git:
-      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.system.git
+    path: ../fpa.manager.client.system
 
   mytheme:
-    git:
-      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.presentation.theme.git
+    path: ../fpa.manager.client.presentation.theme
 
   phosphor_flutter: ^1.4.0
 
