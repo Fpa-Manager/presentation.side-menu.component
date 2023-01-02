@@ -14,11 +14,11 @@ dependencies:
 
   system:
     git:
-      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.system.git
+      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.system.git
 
   mytheme:
     git:
-      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.presentation.theme.git
+      url: https://Fitness-Professional-Association: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@github.com/Fitness-Professional-Association/fpa.manager.client.presentation.theme.git
 
   phosphor_flutter: ^1.4.0
 

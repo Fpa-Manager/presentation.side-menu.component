@@ -25,9 +25,9 @@ class _SideMenuState extends State<SideMenu> {
   Widget getItem(ISideMenuItem element) {
     var item =
     SideMenuItem(element,
-        // hover: const HoverEffect(
-        //   //decoration: BoxDecoration(color: Color(0xFFE5ECF9)),
-        // ),
+        hover: const HoverEffect(
+          decoration: BoxDecoration(color: Color(0xFFE5ECF9)),
+        ),
         tap: TapEffect(
           decoration: BoxDecoration(color: Color(0xFFDCE0E8)),
           onPressed: element.command.executeAsync

@@ -31,6 +31,8 @@ class SideMenuItem extends StatelessWidget implements MouseEvent {
     if (hover == null || hover?.decoration == null) {
       result = HoverEffect(
           decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withAlpha(50)));
+    } else {
+      result = hover;
     }
     return result;
   }
@@ -39,6 +41,8 @@ class SideMenuItem extends StatelessWidget implements MouseEvent {
     TapEffect? result;
     if (tap == null || tap?.decoration == null) {
       result = TapEffect(decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary));
+    } else {
+      result = tap;
     }
     return result;
   }
