@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:side_menu/model_interface.dart';
+import 'package:side_menu/src/model_interface.dart';
 import 'package:system/system.dart';
 
-import 'blznc_command.dart';
-
-class Model extends ChangeNotifier implements ISideMenuModel {
+class SideMenuViewModel extends ChangeNotifier implements ISideMenuModel {
   final List<_KeyValue<Position, ISideMenuItem>> _array = [];
 
   @override
@@ -25,7 +23,7 @@ class Model extends ChangeNotifier implements ISideMenuModel {
   }
 
   @override
-  void addItem(int? key, String title, int? iconKey, ICommandAsync command,
+  void addItem(int? key, String? title, int? iconKey, ICommandAsync command,
       Position position) {
     var item = Item(title, iconKey, command, _isItemActive, key ?? 0);
 
@@ -35,7 +33,7 @@ class Model extends ChangeNotifier implements ISideMenuModel {
   }
 
   @override
-  void changeItem(oldItemKey, int? newKey, String title, int? iconKey, ICommandAsync command) {
+  void changeItem(oldItemKey, int? newKey, String? title, int? iconKey, ICommandAsync command) {
     var itemIndex = _array.indexWhere((element) => element.value.key == oldItemKey);
     if(itemIndex != -1){
       var newItem = Item(title, iconKey, command, _isItemActive, newKey ?? 0);
@@ -43,12 +41,6 @@ class Model extends ChangeNotifier implements ISideMenuModel {
       notifyListeners();
     }
   }
-
-  void changeTest(){
-    changeItem(111, 555, "Chznget Item", null, BlancConsoleCommand());
-  }
-
-
 }
 
 class _KeyValue<TKey, TValue> {
@@ -63,7 +55,7 @@ class Item extends ChangeNotifier implements ISideMenuItem {
   int key;
 
   @override
-  final String title;
+  final String? title;
 
   @override
   final int? icon;

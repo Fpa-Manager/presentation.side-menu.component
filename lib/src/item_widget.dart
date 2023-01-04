@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mytheme/colors.dart';
 import 'package:mytheme/theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:side_menu/side_menu.dart';
@@ -12,7 +12,9 @@ class SideMenuItem extends StatelessWidget implements MouseEvent {
   @override
   final TapEffect? tap;
 
-  const SideMenuItem(this.item, {super.key, this.hover, this.tap});
+  final Color? selectedColor;
+
+  const SideMenuItem(this.item, {super.key, this.hover, this.tap, this.selectedColor});
 
   Icon? getIcon() {
     Icon? icon;
@@ -26,40 +28,34 @@ class SideMenuItem extends StatelessWidget implements MouseEvent {
     return icon;
   }
 
-  HoverEffect? _hoverEffect(BuildContext context) {
-    HoverEffect? result;
-    if (hover == null || hover?.decoration == null) {
-      result = HoverEffect(
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withAlpha(50)));
-    } else {
-      result = hover;
-    }
-    return result;
+  HoverEffect? _hover() {
+    if (item.isSelected || item.isEnable == false) return const HoverEffect(decoration: BoxDecoration());
+    return hover;
   }
 
-  TapEffect? _tapEffect(BuildContext context) {
-    TapEffect? result;
-    if (tap == null || tap?.decoration == null) {
-      result = TapEffect(decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary));
-    } else {
-      result = tap;
-    }
-    return result;
+  TapEffect? _tap() {
+    if (item.isSelected || item.isEnable == false) return const TapEffect(decoration: BoxDecoration());
+    return tap;
+  }
+
+  BoxDecoration? _selectedDecoration(BuildContext context) {
+    if (item.isSelected == false) return BoxDecoration();
+    return BoxDecoration(color: selectedColor ?? Theme.of(context).colorScheme.surface);
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 90,
+      // width: 90,
       height: 90,
       child: RoundedContainer(
         border: const RoundedBorder(radius: 5),
         child: HoveredContainer(
-          hover: item.isSelected || item.isEnable == false ? null : _hoverEffect(context),
-          tap: item.isSelected || item.isEnable == false ? null : _tapEffect(context),
+          hover: _hover(),
+          tap: _tap(),
           child: Container(
             padding: const EdgeInsets.all(5),
-            decoration: item.isSelected ? tap?.decoration : null,
+            decoration: _selectedDecoration(context),
             child: Stack(children: [
               Visibility(
                   visible: item.isEnable == false,
@@ -73,17 +69,30 @@ class SideMenuItem extends StatelessWidget implements MouseEvent {
                 children: [
                   Expanded(
                     flex: 9,
-                    child: Center(child: getIcon()),
+                    child: Center(
+                        child: item.icon == null
+                            ? null
+                            : Icon(
+                                PhosphorIconData(item.icon!),
+                                size: 40,
+                                color: item.isSelected
+                                    ? AppColors.activeGray
+                                    : AppColors.inActiveGray
+                        ),
+                    ),
                   ),
+                  if(item.title != null)
                   Expanded(
                       flex: 5,
                       child: Center(
-                        child: Text(item.title,
+                        child: Text(item.title ?? "undefined",
                             textAlign: TextAlign.center,
-                            style: item.isSelected
-                                ? const TextStyle(fontSize: 12.0, color: Color(0xFF2B2D40))
-                                : const TextStyle(fontSize: 12.0, color: Color(0xFF8F99AC))),
-                      )),
+                            style: TextStyle(fontSize: 12.0,
+                                color: item.isSelected
+                                    ? AppColors.activeGray
+                                    : AppColors.inActiveGray
+                            ),
+                      ))),
                 ],
               ),
             ]),
